@@ -1,0 +1,40 @@
+{% block page_content %}
+{% load static %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html>
+<head>
+    <div class="center">
+        <a href= {% url 'media' %}><h1 class="header">Home</h1></a>
+        <a href= {% url 'creators' %}><h1 class="header">Creators</h1></a>
+    </div>
+</head>
+<body>
+        <div>
+            {% for m in media %}
+                {% if m.data.contentData.rank  == 1 %}
+                    <h2>{{ m }}
+                        <a href="https://www.youtube.com/channel/{{m.creatorID.youtubeID}}" title="www.youtube.com/{{m.creatorID.youtubeID}}">
+                            {% if m.creatorID.getLiveStatus.isLiveYoutube %} <img src="{% static 'img/youtubeLive.png' %}" width="60" height="35">
+                            {% else %} <img class="grey" src="{% static 'img/youtubeLive.png' %}" width="60" height="35">
+                            {% endif %}
+                        </a>
+                        <a href="https://www.twitch.tv/{{m.creatorID.twitchName}}" title="www.twitch.tv/{{m.creatorID.twitchName}}">
+                            {% if m.creatorID.getLiveStatus.isLiveTwitch %} <img src="{% static 'img/twitchLive.png' %}" width="60" height="35">
+                            {% else %} <img class="grey" src="{% static 'img/twitchLive.png' %}" width="60" height="35">
+                            {% endif %}
+                        </a>
+                    </h2>
+                {% endif %}
+
+                <a href= {{ m.data.contentData.link }}>
+                    {% if m.data.platform == "YouTube" %} <img src="{% static 'img/youtubeLogo.png' %}" width="15" height="15"> {% endif %}
+                    <b>{{ m.data.contentData.title }}</b>
+                    <i>{{ m.data.contentData.date }}</i>
+                </a><br>
+            {% endfor %}
+        </div>
+    {% endblock %}
+</body>
+</html>
+

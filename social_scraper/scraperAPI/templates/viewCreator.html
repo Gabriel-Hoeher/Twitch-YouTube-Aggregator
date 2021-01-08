@@ -1,0 +1,40 @@
+{% block page_content %}
+{% load static %}
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<html>
+    <head>
+        <div class="center">
+            <a href= {% url 'media' %}><h1 class="header">Home</h1></a>
+            <a href= {% url 'creators' %}><h1 class="header">Creators</h1></a>
+        </div>
+    </head>
+    <body>
+        <h2>Your Creators</h2>
+        <table style="width: 80%">
+            <div>
+                <tr>
+                    <th><b>Creator</b></th>
+                    <th><b>Youtube ID</b></th>
+                    <th><b>Twitch Name</b></th>
+                </tr>
+                {% for creator in creators %}
+                    <tr><p>
+                        <td><i>{{ creator.name }}</i></td>
+                        <td><a href="https://www.youtube.com/channel/{{creator.youtubeID}}">{{ creator.youtubeID }}</a></td>
+                        {% if creator.twitchName %} 
+                            <td><a href="https://www.twitch.tv/{{creator.twitchName}}">{{ creator.twitchName }}</a></td>
+                        {% endif %}
+                    </p></tr>
+                {% endfor %}
+            </div>
+        </table><br>
+        <h2>Change Creator</h2>
+        <form action="/creators/", method="POST">
+            {% csrf_token %}
+            <table style="width: 33%">{{ form.as_table }}</table>
+            <input type="submit", value="Submit">
+        </form>
+    </body>
+</html>
+{% endblock %}

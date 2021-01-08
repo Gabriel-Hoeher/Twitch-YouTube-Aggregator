@@ -1,0 +1,36 @@
+body {
+    background-color: darkslategray;
+    color: whitesmoke;
+    font-size: 22px;
+}
+
+h1.header {
+    text-decoration: inherit;
+    color: hotpink;
+    display: inline;
+    padding: 5%;
+}
+
+h2 {color: hotpink;}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+a:hover {color: hotpink;}
+
+a.header {display: inline;}
+
+div.center {
+    width: 25%;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+th {text-align: left;}
+
+label {font-size: smaller;}
+
+img.grey {filter: grayscale(100%);}
+
